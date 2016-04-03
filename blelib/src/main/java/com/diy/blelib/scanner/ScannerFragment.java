@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelUuid;
@@ -249,6 +250,7 @@ public class ScannerFragment extends DialogFragment{
         @Override
         public void onLeScan(final BluetoothDevice device, final int rssi, final byte[] scanRecord) {
             if (device != null) {
+                Log.i(TAG, "device.getUuids():" + device.getUuids());
                 updateScannedDevice(device, rssi);
                 try {
                     if (ScannerServiceParser.decodeDeviceAdvData(scanRecord, mUuid, mDiscoverableRequired)) {
